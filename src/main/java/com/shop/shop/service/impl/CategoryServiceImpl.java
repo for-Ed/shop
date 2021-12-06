@@ -70,6 +70,6 @@ public class CategoryServiceImpl  implements CategoryService {
             return byId.get();
         }
         //todo make custom exception
-        throw  new IllegalArgumentException("Product with Id" + id + " not found");
+        throw  new IllegalArgumentException("Product with id " + id + " not found");
     }
 }
