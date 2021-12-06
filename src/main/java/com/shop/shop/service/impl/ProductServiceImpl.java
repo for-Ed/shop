@@ -1,5 +1,7 @@
 package com.shop.shop.service.impl;
 
+import com.shop.shop.configuration.exception.NotFoundException;
+import com.shop.shop.configuration.exception.product.ProductNotFoundException;
 import com.shop.shop.dto.CategoryDTO;
 import com.shop.shop.dto.ProductDTO;
 import com.shop.shop.entity.Category;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,7 +30,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getOne(Long id) {
-        return repository.getById(id);
+        Optional<Product> byId = repository.findById(id);
+        if(byId.isPresent()){
+            return byId.get();
+        }
+        throw new ProductNotFoundException("Product with id " + id + " not found");
     }
 
     @Override
@@ -58,7 +65,6 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product update(ProductDTO productDTO) {
         if(productDTO.getId()==null){
-            // todo custom exception*
             throw new IllegalArgumentException("Id cannot be null!");
         }
         Product product = map(productDTO);
@@ -67,6 +73,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void delete(Long id) {
+        if(id==null){
+            throw new IllegalArgumentException("Id cannot be null!");
+        }
         repository.deleteById(id);
     }
 
