@@ -9,6 +9,7 @@ import com.shop.shop.entity.Product;
 import com.shop.shop.repository.ProductRepository;
 import com.shop.shop.service.CategoryService;
 import com.shop.shop.service.ProductService;
+import com.shop.shop.validator.product.create.ProductCreateValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,11 +22,13 @@ public class ProductServiceImpl implements ProductService {
 
     private ProductRepository repository;
     private CategoryService categoryService;
+    private List<ProductCreateValidator> createValidators;
 
     @Autowired
-    public ProductServiceImpl(ProductRepository repository, CategoryService categoryService) {
+    public ProductServiceImpl(ProductRepository repository, CategoryService categoryService, List<ProductCreateValidator> createValidators) {
         this.repository = repository;
         this.categoryService = categoryService;
+        this.createValidators = createValidators;
     }
 
     @Override
@@ -59,6 +62,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product create(ProductDTO productDTO) {
         Product product = map(productDTO);
+        createValidators.stream().forEach(productCreateValidator -> productCreateValidator.validate(product));
         return repository.save(product);
     }
 

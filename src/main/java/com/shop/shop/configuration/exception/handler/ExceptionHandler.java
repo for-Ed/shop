@@ -29,5 +29,5 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
          return new ResponseEntity<>(ex.getMessage(),HttpStatus.NOT_FOUND);
          //return handleExceptionInternal(ex, bodyOfResponse,new HttpHeaders(), HttpStatus.CONFLICT, request);
      }
-
+//todo add handlers
 }
