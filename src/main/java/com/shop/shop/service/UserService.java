@@ -9,4 +9,6 @@ public interface UserService {
     User createUser(RegistryDTO registryDTO);
 
     User getByEmailAndPassword(String email, String password);
+
+    User getCurrentUser();
 }

@@ -3,13 +3,14 @@ package com.shop.shop.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
 public class Product {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
@@ -23,4 +24,6 @@ public class Product {
 
     private Long Capacity;
 
+    @OneToMany(mappedBy = "product")
+    private List <CartNode> cartNodes;
 }

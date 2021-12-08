@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component;
 public class ProductPriceValidator implements ProductCreateValidator {
     @Override
     public void validate(Product product) {
-        if (product.getPrice()==null){
+        if ((product.getPrice()==null)||(product.getPrice()<0)){
             throw new ProductPriceException("Wrong input. Price cannot be null");
         }
-        if (product.getPrice()<0){
+        /*if (product.getPrice()<0){
             throw new ProductPriceException("Wrong input. Price cannot be less than 0");
-        }
+        }*/
     }
 }

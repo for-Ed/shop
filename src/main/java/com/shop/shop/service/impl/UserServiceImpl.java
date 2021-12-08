@@ -3,6 +3,7 @@ package com.shop.shop.service.impl;
 import com.shop.shop.configuration.exception.NotFoundException;
 import com.shop.shop.configuration.exception.user.EmailNotAvailableException;
 import com.shop.shop.configuration.exception.user.ConfirmPasswordMismatchException;
+import com.shop.shop.configuration.exception.user.NoLoggedUserException;
 import com.shop.shop.configuration.exception.user.PasswordMismatchException;
 import com.shop.shop.dto.RegistryDTO;
 import com.shop.shop.entity.Role;
@@ -10,7 +11,10 @@ import com.shop.shop.entity.User;
 import com.shop.shop.repository.UserRepository;
 import com.shop.shop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -63,5 +67,16 @@ public class UserServiceImpl implements UserService {
             return user;
         }
         throw new PasswordMismatchException("Wrong password");
+    }
+
+    @Override
+    public User getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Object principal = authentication.getPrincipal();
+        //todo add
+        User user = (User) principal;
+        String currentUserEmail = user.getEmail();
+        return getByEmail(currentUserEmail);
+        //throw new NoLoggedUserException("No logged user");
     }
 }

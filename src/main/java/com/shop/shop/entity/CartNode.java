@@ -1,25 +1,23 @@
 package com.shop.shop.entity;
 
 import lombok.Data;
-
+import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
-@Data
 @Entity
-public class User {
+@Data
+@NoArgsConstructor
+public class CartNode {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String email;
+    @ManyToOne
+    private Product product;
 
-    private String password;
+    private Long count;
 
-    private Role role;
-
-    @OneToOne
+    @ManyToOne
     private Cart cart;
-
-    private Boolean confirmed = false;
 }
