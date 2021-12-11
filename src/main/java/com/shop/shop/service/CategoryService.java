@@ -20,5 +20,5 @@ public interface CategoryService {
     Category map(CategoryDTO categoryDTO);
 
     Category getOne(Long id);
-
 }
+

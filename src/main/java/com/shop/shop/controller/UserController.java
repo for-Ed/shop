@@ -32,5 +32,4 @@ public class UserController {
         User user = userService.getByEmailAndPassword(registryDTO.getEmail(), registryDTO.getPassword());
         return jwtProvider.generateToken(user.getEmail());
     }
-
 }

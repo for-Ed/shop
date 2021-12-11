@@ -20,6 +20,6 @@ public class HelloController{
     public String hello(@PathVariable("userName") String name){
         return "Hello! " + name;
     }
-
 }
+
 

@@ -3,6 +3,8 @@ package com.shop.shop.controller;
 import com.shop.shop.dto.CategoryDTO;
 import com.shop.shop.entity.Category;
 import com.shop.shop.service.CategoryService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import java.util.stream.Collectors;
 
 @RestController()
 @RequestMapping("/category")
+//@Api(tags = "This is check for", description = " ApiOperation tags")
 public class CategoryController {
     CategoryService categoryService;
     @Autowired
@@ -39,6 +42,7 @@ public class CategoryController {
         Category category = categoryService.update(categoryDTO);
         return categoryService.map(category);
     }
+    @ApiOperation("This method returns one category by id")
     @GetMapping("/{id}")
     public CategoryDTO getById(@PathVariable("id") Long id){
         Category category = categoryService.getOne(id);
@@ -50,3 +54,4 @@ public class CategoryController {
         return new ResponseEntity(HttpStatus.OK);
     }
 }
+

@@ -8,3 +8,4 @@ import java.util.Locale;
 public interface CategoryRepository extends JpaRepository<Category,Long> {
 
 }
+

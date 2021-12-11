@@ -5,3 +5,4 @@ import com.shop.shop.validator.ItemValidator;
 
 public interface ProductCreateValidator extends ItemValidator {
 }
+

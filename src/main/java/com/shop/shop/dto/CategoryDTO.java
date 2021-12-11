@@ -23,3 +23,4 @@ public class CategoryDTO {
     /* @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<Long> products; */
 }
+

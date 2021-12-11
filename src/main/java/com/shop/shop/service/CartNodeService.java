@@ -25,4 +25,8 @@ public interface CartNodeService {
     CartNode getByCartAndProduct(Long productId, Cart cart);
 
     CartNode save(CartNode cartNode);
+
+    Long getCartNodePriceByCartNode(CartNode cartNode);
+
+    Long getCartNodePriceById(Long cartNodeId);
 }

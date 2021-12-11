@@ -15,4 +15,6 @@ public interface CartService {
     Cart addProductToCurrentUserCart(ProductDTO productDTO);
 
     Cart deleteProductFromCurrentUserCart(ProductDTO productDTO);
+
+    Long getCartPrice(Long id);
 }

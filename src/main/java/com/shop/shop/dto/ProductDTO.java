@@ -29,3 +29,4 @@ public class ProductDTO {
         this.capacity = product.getCapacity();
     }
 }
+

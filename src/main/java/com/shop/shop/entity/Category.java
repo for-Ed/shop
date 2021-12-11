@@ -15,8 +15,8 @@ public class Category {
     @Column(unique = true, nullable = false)
     private String name;
 
-    @OneToMany(mappedBy="category", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     private List<Product> products;
-
-
 }
+
+

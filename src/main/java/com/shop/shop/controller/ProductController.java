@@ -8,6 +8,7 @@ import com.shop.shop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,6 +42,7 @@ public class ProductController {
         return productService.map(productService.update(productDTO));
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_USER')")
     @GetMapping("/all")
     private List<ProductDTO> getAll(){
         List<Product> products = productService.getAll();
@@ -53,7 +55,6 @@ public class ProductController {
         return  allByCategories.stream().map(product -> productService.map(product)).collect(Collectors.toList());
     }
 
-
     @DeleteMapping("/delete")
     private ResponseEntity delete(@PathVariable(name = "id")Long id){
         productService.delete(id);
@@ -61,3 +62,4 @@ public class ProductController {
 
     }
 }
+
